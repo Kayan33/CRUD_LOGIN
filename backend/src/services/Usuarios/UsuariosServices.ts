@@ -1,31 +1,65 @@
-import prismaClient from "../../prisma"
+import prismaClient from '../../Prisma'
+import { hash } from 'bcryptjs'
 
-
-interface Usuarios {
-    nome: string
-    email: string
-    senha: string
+interface cadUsuarios {
+    nome: string,
+    email: string,
+    password: string
 }
 
-class UsuarioServices {
+class UsuariosServices {
+    async cadastrarUsuarios({ nome, email, password }: cadUsuarios) {
 
-    async cadastrar_Usuario({ nome, email, senha }: Usuarios) {
-        const cadastar_usuario = await prismaClient.usuarios.create({
-            data: { nome, email, senha }
-        })
-        return ({ data: 'cadastro feito', cadastar_usuario })
-    }
-
-    async  consulta  (){
-        const consulta = await prismaClient.usuarios.findMany({
-            select:{
-                nome:true,
-                email:true,
-                grupos:{ }
+        const senhaCrypt = await hash(password, 8)
+        await prismaClient.cadastarUsuarios.create({
+            data: {
+                nome: nome,
+                email: email,
+                senha: senhaCrypt
             }
         })
-        return consulta
+        return ({ dados: 'Cadastro Efetuado Com Sucesso' })
     }
 
+    async consultarUsuarios() {
+        const resposta = await prismaClient.cadastarUsuarios.findMany({
+            select: {
+                id: true,
+                nome: true,
+                email: true,
+                idGrupos: true,
+                grupos: {
+                    select: {
+                        nome: true
+                    }
+                }
+            }
+        })
+        return resposta
+    }
+
+    async consultarUsuariosUnico(id: string) {
+        const resposta = await prismaClient.cadastarUsuarios.findFirst({
+            where: {
+                id: id
+            },
+            select: {
+                nome: true,
+                email: true,
+                senha: true
+            }
+        })
+        return resposta
+    }
+
+    async apagarUsuarios(id: string) {
+        await prismaClient.cadastarUsuarios.delete({
+            where: {
+                id: id
+            }
+        })
+        return ({ dados: 'Registro Apagado com Sucesso' })
+    }
 }
-export default UsuarioServices
+
+export { UsuariosServices }
