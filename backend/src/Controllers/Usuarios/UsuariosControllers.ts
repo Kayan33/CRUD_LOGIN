@@ -12,6 +12,7 @@ class UsuariosControllers {
             password
         })
         return res.json(resposta)
+        
     }
 
     async consultarUsuarios(req: Request, res: Response) {

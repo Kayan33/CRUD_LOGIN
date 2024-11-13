@@ -3,6 +3,7 @@ import { Router } from 'express'
 //Importação dos Controllers
 import { UsuariosControllers } from './Controllers/Usuarios/UsuariosControllers'
 import { GruposControllers } from './Controllers/Grupos/GruposControllers'
+import { LoginController } from './Controllers/login/loginController'
 
 const router = Router()
 
@@ -13,6 +14,8 @@ router.get('/ConsultarUsuarios', new UsuariosControllers().consultarUsuarios)
 router.post('/ConsultarUsuariosUnico', new UsuariosControllers().consultarUsuariosUnico)
 router.put('/AlterarDadosUsuarios', new UsuariosControllers().alterarDadosUsuarios)
 router.delete('/ApagarUsuarios/:id', new UsuariosControllers().apagarUsuarios)
+
+router.post('/loginUsuarios', new LoginController().loginUsuarios)
 
 //Rotas de Grupos
 router.post('/CadastrarGrupos', new GruposControllers().cadastrarGrupos)

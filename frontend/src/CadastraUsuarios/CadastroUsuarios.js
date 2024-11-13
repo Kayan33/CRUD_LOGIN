@@ -14,10 +14,7 @@ export default function CadastrarUsuarios() {
     async function cadastroUsuarios(e) {
         try {
             e.preventDefault()
-            if (!nome || !email || !password) {
-                alert("Campos em Branco")
-                return
-            }
+            
             await apiLocal.post('/CadastrarUsuarios', {
                 nome,
                 email,
@@ -58,7 +55,7 @@ export default function CadastrarUsuarios() {
                     value={password}
                     onChange={(e) => setpassword(e.target.value)}
                 />
-                <button type='submit'>Enviar</button>
+                <button type='Submit'>Enviar</button>
             </form>
             <Link to='/' className='buttonVoltar' >Voltar Inicio</Link>
         </div>

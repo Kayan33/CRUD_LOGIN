@@ -17,12 +17,14 @@ class UsuariosServices {
     async cadastrarUsuarios({ nome, email, password }: cadUsuarios) {
 
         const senhaCrypt = await hash(password, 8)
+        
         await prismaClient.cadastarUsuarios.create({
             data: {
                 nome: nome,
                 email: email,
                 senha: senhaCrypt
             }
+
         })
         return ({ dados: 'Cadastro Efetuado Com Sucesso' })
     }
