@@ -42,6 +42,19 @@ class LoginServices {
             token:token
         }
     }
+    
+    async verificaToken(id: string) {
+        const resposta = await prismaClient.cadastarUsuarios.findFirst({
+            where: {
+                id: id
+            },
+            select: {
+                id: true,
+             
+            }
+        })
+        return resposta
+    }
 }
 
 export { LoginServices }

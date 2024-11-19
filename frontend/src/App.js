@@ -6,15 +6,13 @@ import Authprovider from './context/authContext'
 export default function App() {
   return (
     <Authprovider>
-
-    <div>
-      <Rotas />
-      <ToastContainer
-        autoClose={5000}
+      <div>
+        <Rotas />
+        <ToastContainer
+          autoClose={5000}
         />
-    </div>
-
-        </Authprovider>
+      </div>
+    </Authprovider>
   )
 }
 

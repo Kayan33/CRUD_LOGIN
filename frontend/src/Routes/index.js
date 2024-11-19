@@ -5,10 +5,10 @@ import NAutenticado from './nAutenticado.routes'
 import { AutenticadoContexto } from '../context/authContext'
 
 
-export default function Rotas(){
-   const {autenticado} = useContext(AutenticadoContexto)
+export default function Rotas() {
+    const { autenticado } = useContext(AutenticadoContexto)
 
-    return(
+    return (
         autenticado === true ? <Autenticado /> : <NAutenticado />
     )
 }
